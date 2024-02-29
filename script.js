@@ -1,4 +1,3 @@
-<<<<<<< Updated upstream
 'use strict';
 
 const restaurant = {
@@ -45,6 +44,3 @@ console.log(i, j, k);
 // default values
 const [p = 1, q = 1, r =1] = [8];
 console.log(p, q, r);
-=======
-'use strict';
->>>>>>> Stashed changes
