@@ -38,55 +38,42 @@ const restaurant = {
   orderPasta: function (ing1, ing2, ing3) {
     console.log(`Here is your delicious pasta with ${ing1}, ${ing2}, ${ing3}`);
   },
+  orderPizza: function (mainIngredient, ...otherIngredients) {
+    console.log(mainIngredient);
+    console.log(otherIngredients);
+  }
 };
 
-const arr = [7, 8, 9];
-const badNewArr = [1, 2, arr[0], arr[1], arr[2]];
-console.log(badNewArr);
+// 1) destructuring
 
-const newArr = [1, 2, ...arr];
-console.log(newArr);
+// SPREAD, because on RIGHT side of =
+const arr = [1, 2, ...[3, 4]];
+console.log(arr);
 
-console.log(...newArr);
-console.log(1, 2, 7, 8, 9);
+// REST, because on LEFT side of =
+const [a, b, ...others] = [1, 2, 3, 4, 5];
+console.log(a, b, others);
 
-const newMenu = [...restaurant.mainMenu, ['Gnocci']];
-console.log(newMenu);
-
-// copy array
-const mainMenuCopy = [...restaurant.mainMenu];
-
-// join 2 arrays
-const menu = [...restaurant.starterMenu, ...restaurant.mainMenu];
-console.log(menu);
-
-// iterables: arrays, strings, maps, sets NOT objects
-const str = 'Jonas';
-const letters = [...str, ' ', '.S'];
-console.log(letters);
-console.log(...str);
-// console.log(`${...str} Schemedttmann`);
-
-// real world example
-const ingredients = [
-//   prompt("Let's make pasta! Ingredient 1?"),
-//   prompt('Ingredient 2?'),
-//   prompt('Ingredient 3?'),
-];
-console.log(ingredients);
-
-restaurant.orderPasta(ingredients[0], ingredients[1], ingredients[2]);
-restaurant.orderPasta(...ingredients);
+const [pizza, , risotto, ...otherFoods] = [...restaurant.mainMenu, ...restaurant.starterMenu];
+console.log(pizza, risotto, otherFoods);
 
 // objects
-const newRestaurant = {
-    foundedIn: 1998,
-    ...restaurant,
-    founder: 'Guiseppe'
-};
-console.log(newRestaurant);
+const { sat, ...weekdays } = restaurant.openingHours;
+console.log(sat, weekdays);
 
-const restaurantCopy = {...restaurant};
-restaurantCopy.name = 'Ristorante Roma';
-console.log(restaurantCopy.name);
-console.log(restaurant.name);
+// 2) functions
+const add = function (...numbers) {
+  let sum = 0;
+  for (let i = 0; i < numbers.length; i++) sum = sum + numbers[i];
+  console.log(sum);
+};
+add(2, 3);
+add(5, 3, 7, 2);
+add(8, 2, 5, 3, 2, 1, 4);
+
+// add array into the function
+const x = [23, 5, 7];
+add(...x);
+
+restaurant.orderPizza('mushrooms', 'onion', 'olives', 'spinach');
+restaurant.orderPizza('mushrooms');
